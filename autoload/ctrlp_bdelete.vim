@@ -36,7 +36,8 @@ function! ctrlp_bdelete#mappings(...)
     call call(s:ctrlp_bdelete_user_func, a:000)
   endif
 
-  nnoremap <buffer> <silent> <c-@> :call <sid>DeleteMarkedBuffers()<cr>
+  let bdelete_keymap_trigger = get(g:, "ctrlp_bdelete_keymap_trigger", '<c-@>')
+  exec 'nnoremap <buffer> <silent> ' . bdelete_keymap_trigger . ' :call <sid>DeleteMarkedBuffers()<cr>'
 endfunction
 
 function! s:DeleteMarkedBuffers()
