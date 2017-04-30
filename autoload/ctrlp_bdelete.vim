@@ -48,7 +48,7 @@ function! s:DeleteMarkedBuffers()
   let marked = ctrlp#getmarkedlist()
 
   " the file under the cursor is implicitly marked
-  if empty(marked)
+  if empty(marked) && ctrlp#getcline() != ''
     call add(marked, fnamemodify(ctrlp#getcline(), ':p'))
   endif
 
