@@ -14,6 +14,11 @@
 " =============================================================================
 
 " Initialize the bdelete extension to ctrlp (applies settings to ctrlp).
+if (exists('g:ctrlp_bdelete_loaded')) || &cp
+    finish
+end
+let g:ctrlp_bdelete_loaded = 1
+
 function! ctrlp_bdelete#init()
   if !exists('g:ctrlp_buffer_func')
     let g:ctrlp_buffer_func = {}
@@ -56,7 +61,7 @@ function! s:DeleteMarkedBuffers()
   " call bdelete on all marked buffers
   for fname in marked
     let g:ctrlp_delete_buf_fname = fname
-    let bufid = fname =~ '\[\d\+\*No Name\]$' 
+    let bufid = fname =~ '\[\d\+\*No Name\]$'
                         \ ? str2nr(matchstr(matchstr(fname, '\[\d\+\*No Name\]$'), '\d\+'))
                         \ : fnamemodify(fname, ':p')
     let g:ctrlp_delete_buf_bufid = substitute(bufid, ' ', '\\ ', "g")
