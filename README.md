@@ -1,5 +1,7 @@
 # ctrlp_bdelete.vim
 
+> Merged the following repos [j5shi](https://github.com/j5shi/ctrlp_bdelete.vim), [amadeus](https://github.com/amadeus/ctrlp_bdelete.vim), [hokorobi](https://github.com/hokorobi/ctrlp_bdelete.vim)
+
 The ctrlp.vim plugin for Vim does not provide a way to delete open buffers and
 there are no plans to add this functionality.
 
@@ -36,6 +38,8 @@ list.
 
 You may also mark multiple buffers with <kbd>c-z</kbd> and then close them all
 at once with a single press of <kbd>c-@</kbd>.
+
+You can set your own mapping with `let g:ctrlp_bdelete_keymap_trigger = <c-@>`
 
 ### TODO
 
