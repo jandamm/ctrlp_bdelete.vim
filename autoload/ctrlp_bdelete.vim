@@ -55,9 +55,12 @@ function! s:DeleteMarkedBuffers()
 
   " call bdelete on all marked buffers
   for fname in marked
-    let bufid = fname =~ '\[\d\+\*No Name\]$' ? str2nr(matchstr(fname, '\d\+'))
-          \ : fnamemodify(fname[2:], ':p')
-    exec "silent! bdelete" bufid
+    let g:ctrlp_delete_buf_fname = fname
+    let bufid = fname =~ '\[\d\+\*No Name\]$' 
+                        \ ? str2nr(matchstr(matchstr(fname, '\[\d\+\*No Name\]$'), '\d\+'))
+                        \ : fnamemodify(fname, ':p')
+    let g:ctrlp_delete_buf_bufid = substitute(bufid, ' ', '\\ ', "g")
+    exec "silent! bdelete" g:ctrlp_delete_buf_bufid
   endfor
 
   " refresh ctrlp
