@@ -18,16 +18,10 @@ The easiest way to install ctrlp_bdelete.vim is using
 [Vundle](https://github.com/gmarik/Vundle.vim) or
 [Pathogen](https://github.com/tpope/vim-pathogen).
 
-You'll also need to add the following line to your ~/.vimrc:
-
-``` vim
-call ctrlp_bdelete#init()
-```
-
-This simply adds a user setting to ctrlp itself. If you are already setting
-`g:ctrlp_buffer_func` somewhere in your vimrc, make sure to call
-`ctrlp_bdelete#init()` after that (this plugin won't clobber it, but you may
-clobber the plugin initialization if you change `g:ctrlp_buffer_func` later).
+If you are already setting `g:ctrlp_buffer_func` somewhere in your vimrc,
+make sure to call `ctrlp_bdelete#init()` after that (this plugin won't clobber it,
+but you may clobber the plugin initialization if you change
+`g:ctrlp_buffer_func` later).
 
 ## Usage
 
