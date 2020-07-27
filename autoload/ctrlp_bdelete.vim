@@ -14,13 +14,23 @@
 " =============================================================================
 
 if (exists('g:ctrlp_bdelete_lazyloaded')) || &compatible
-    finish
+  finish
 end
 let g:ctrlp_bdelete_lazyloaded = 1
 
 function! ctrlp_bdelete#init() abort
   unlet g:ctrlp_bdelete_loaded
   runtime plugin/ctrlp_bdelete.vim
+endfunction
+
+
+function! ctrlp_bdelete#store() abort
+  " don't clobbber any existing user setting
+  if has_key(g:ctrlp_buffer_func, 'enter')
+    if g:ctrlp_buffer_func['enter'] !=# 'ctrlp_bdelete#mappings'
+      let s:ctrlp_bdelete_user_func = g:ctrlp_buffer_func['enter']
+    endif
+  endif
 endfunction
 
 " Buffer function used in the ctrlp settings (applies mappings).
@@ -51,8 +61,8 @@ function! s:DeleteMarkedBuffers() abort
   for fname in marked
     let g:ctrlp_delete_buf_fname = fname
     let bufid = fname =~# '\[\d\+\*No Name\]$'
-                        \ ? str2nr(matchstr(matchstr(fname, '\[\d\+\*No Name\]$'), '\d\+'))
-                        \ : fnamemodify(fname, ':p')
+          \ ? str2nr(matchstr(matchstr(fname, '\[\d\+\*No Name\]$'), '\d\+'))
+          \ : fnamemodify(fname, ':p')
     let g:ctrlp_delete_buf_bufid = substitute(bufid, ' ', '\\ ', 'g')
     exec 'silent! bdelete' g:ctrlp_delete_buf_bufid
   endfor
